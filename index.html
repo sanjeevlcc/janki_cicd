@@ -1,6 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Janki Store - Version 1.1</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #0f172a;
+      --light: #f8fafc;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --warning: #f59e0b;
+      --card: #ffffff;
+      --shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<h1>  this is jankini app under v1.4  </h1>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--secondary);
+      line-height: 1.6;
+    }
 
+    .version-bar {
+      background: var(--secondary);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
 
-<h1>    hello barsha .......... form csit6</h1>
+    header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    nav a {
+      margin: 0 12px;
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .cart-button {
+      border: none;
+      background: var(--primary);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 50px 20px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .hero-text h1 {
+      font-size: 48px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-outline {
+      background: white;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .hero-card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .hero-card img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 25px;
+      gap: 20px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .category {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .category-icon {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .filter-btn {
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .product {
+      background: var(--card);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-image {
+      height: 180px;
+      background: linear-gradient(135deg, #dbeafe, #eff6ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 62px;
+    }
+
+    .product-body {
+      padding: 18px;
+      flex: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 4px 8px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .product h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .rating {
+      color: var(--warning);
+      margin-bottom: 8px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .price {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .old-price {
+      color: var(--muted);
+      text-decoration: line-through;
+      font-size: 14px;
+    }
+
+    .add-btn {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 9px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .deal-banner {
+      background: linear-gradient(135deg, var(--primary), #1e40af);
+      color: white;
+      padding: 40px;
+      border-radius: 22px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .deal-banner h2 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .deal-box {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      min-width: 180px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: var(--muted);
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .testimonial {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .testimonial p {
+      color: var(--muted);
+      margin-bottom: 15px;
+    }
+
+    .newsletter {
+      background: white;
+      padding: 40px;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .newsletter h2 {
+      margin-bottom: 10px;
+    }
+
+    .newsletter p {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 520px;
+      margin: auto;
+      gap: 10px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    footer {
+      background: var(--secondary);
+      color: white;
+      margin-top: 60px;
+      padding: 40px 20px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 30px;
+    }
+
+    footer h3 {
+      margin-bottom: 15px;
+    }
+
+    footer a {
+      display: block;
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-bottom: 8px;
+    }
+
+    footer p {
+      color: #cbd5e1;
+    }
+
+    .cart-panel {
+      position: fixed;
+      right: -420px;
+      top: 0;
+      width: 380px;
+      height: 100vh;
+      background: white;
+      box-shadow: -10px 0 30px rgba(15, 23, 42, 0.2);
+      z-index: 100;
+      transition: 0.3s;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .cart-panel.open {
+      right: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .close-cart {
+      border: none;
+      background: var(--danger);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+
+    .cart-total {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      margin-top: 15px;
+      background: var(--success);
+      color: white;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .products,
+      .categories,
+      .features,
+      .testimonials,
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-text h1 {
+        font-size: 34px;
+      }
+
+      .products,
+      .categories,
+      .features,
+      .testimonials,
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+
+      .deal-banner {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .cart-panel {
+        width: 100%;
+        right: -100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="version-bar">Version 1.1</div>
+
+  <header>
+    <div class="navbar">
+      <div class="logo">Janki Store</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#products">Products</a>
+        <a href="#deals">Deals</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="cart-button" onclick="toggleCart()">Cart (<span id="cartCount">0</span>)</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <h1>Modern Shopping Experience for Everyone</h1>
+        <p>
+          Welcome to Janki Store, a simple ecommerce demo website created for
+          CI/CD deployment practice using Jenkins, GitHub, and Apache2.
+        </p>
+        <div class="hero-actions">
+          <a href="#products" class="btn btn-primary">Shop Now</a>
+          <a href="#deals" class="btn btn-outline">View Deals</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80" alt="Shopping" />
+        <h2>Fast, Clean, Responsive</h2>
+        <p>Designed for student DevOps lab demonstration.</p>
+      </div>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="section-title">
+        <div>
+          <h2>Shop by Category</h2>
+          <p>Choose products from popular categories.</p>
+        </div>
+      </div>
+
+      <div class="categories">
+        <div class="category">
+          <div class="category-icon">💻</div>
+          <h3>Electronics</h3>
+          <p>Laptops, gadgets and accessories.</p>
+        </div>
+        <div class="category">
+          <div class="category-icon">👕</div>
+          <h3>Fashion</h3>
+          <p>Clothes, shoes and lifestyle products.</p>
+        </div>
+        <div class="category">
+          <div class="category-icon">🏠</div>
+          <h3>Home</h3>
+          <p>Useful products for daily living.</p>
+        </div>
+        <div class="category">
+          <div class="category-icon">☕</div>
+          <h3>Coffee</h3>
+          <p>Fresh roasted coffee and café items.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="section-title">
+        <div>
+          <h2>Featured Products</h2>
+          <p>Click Add to Cart to test simple frontend functionality.</p>
+        </div>
+      </div>
+
+      <div class="filters">
+        <button class="filter-btn active" onclick="filterProducts('all')">All</button>
+        <button class="filter-btn" onclick="filterProducts('electronics')">Electronics</button>
+        <button class="filter-btn" onclick="filterProducts('fashion')">Fashion</button>
+        <button class="filter-btn" onclick="filterProducts('home')">Home</button>
+        <button class="filter-btn" onclick="filterProducts('coffee')">Coffee</button>
+      </div>
+
+      <div class="products" id="productGrid">
+        <div class="product" data-category="electronics">
+          <div class="product-image">💻</div>
+          <div class="product-body">
+            <span class="badge">Electronics</span>
+            <h3>Student Laptop</h3>
+            <div class="rating">★★★★★</div>
+            <p>Perfect laptop for online class and coding practice.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 75,000</div>
+                <div class="old-price">Rs. 82,000</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('Student Laptop', 75000)">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product" data-category="electronics">
+          <div class="product-image">🎧</div>
+          <div class="product-body">
+            <span class="badge">Electronics</span>
+            <h3>Wireless Headphone</h3>
+            <div class="rating">★★★★☆</div>
+            <p>Comfortable headphone for study and entertainment.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 4,500</div>
+                <div class="old-price">Rs. 5,200</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('Wireless Headphone', 4500)">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product" data-category="fashion">
+          <div class="product-image">👕</div>
+          <div class="product-body">
+            <span class="badge">Fashion</span>
+            <h3>Premium T-Shirt</h3>
+            <div class="rating">★★★★★</div>
+            <p>Soft cotton t-shirt for everyday casual wear.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 1,200</div>
+                <div class="old-price">Rs. 1,500</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('Premium T-Shirt', 1200)">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product" data-category="fashion">
+          <div class="product-image">👟</div>
+          <div class="product-body">
+            <span class="badge">Fashion</span>
+            <h3>Running Shoes</h3>
+            <div class="rating">★★★★☆</div>
+            <p>Lightweight shoes for walking, running and travel.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 3,800</div>
+                <div class="old-price">Rs. 4,300</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('Running Shoes', 3800)">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product" data-category="home">
+          <div class="product-image">🪑</div>
+          <div class="product-body">
+            <span class="badge">Home</span>
+            <h3>Office Chair</h3>
+            <div class="rating">★★★★★</div>
+            <p>Comfortable chair for office, study and computer work.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 9,500</div>
+                <div class="old-price">Rs. 11,000</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('Office Chair', 9500)">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product" data-category="home">
+          <div class="product-image">💡</div>
+          <div class="product-body">
+            <span class="badge">Home</span>
+            <h3>Smart LED Lamp</h3>
+            <div class="rating">★★★★☆</div>
+            <p>Energy-saving lamp suitable for home and study room.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 2,100</div>
+                <div class="old-price">Rs. 2,600</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('Smart LED Lamp', 2100)">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product" data-category="coffee">
+          <div class="product-image">☕</div>
+          <div class="product-body">
+            <span class="badge">Coffee</span>
+            <h3>Roasted Coffee Beans</h3>
+            <div class="rating">★★★★★</div>
+            <p>Fresh roasted Nepali coffee beans for café and home.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 2,500</div>
+                <div class="old-price">Rs. 2,900</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('Roasted Coffee Beans', 2500)">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product" data-category="coffee">
+          <div class="product-image">🫘</div>
+          <div class="product-body">
+            <span class="badge">Coffee</span>
+            <h3>Green Coffee Beans</h3>
+            <div class="rating">★★★★☆</div>
+            <p>Selected green beans for roasting and quality control.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 1,500</div>
+                <div class="old-price">Rs. 1,800</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('Green Coffee Beans', 1500)">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product" data-category="electronics">
+          <div class="product-image">⌨️</div>
+          <div class="product-body">
+            <span class="badge">Electronics</span>
+            <h3>Mechanical Keyboard</h3>
+            <div class="rating">★★★★★</div>
+            <p>Responsive keyboard for programmers and gamers.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 6,200</div>
+                <div class="old-price">Rs. 7,000</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('Mechanical Keyboard', 6200)">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product" data-category="fashion">
+          <div class="product-image">🎒</div>
+          <div class="product-body">
+            <span class="badge">Fashion</span>
+            <h3>College Backpack</h3>
+            <div class="rating">★★★★☆</div>
+            <p>Strong backpack for books, laptop and accessories.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 2,800</div>
+                <div class="old-price">Rs. 3,400</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('College Backpack', 2800)">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product" data-category="home">
+          <div class="product-image">🍳</div>
+          <div class="product-body">
+            <span class="badge">Home</span>
+            <h3>Kitchen Set</h3>
+            <div class="rating">★★★★☆</div>
+            <p>Useful kitchen set for modern homes and apartments.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 4,900</div>
+                <div class="old-price">Rs. 5,600</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('Kitchen Set', 4900)">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product" data-category="coffee">
+          <div class="product-image">🥤</div>
+          <div class="product-body">
+            <span class="badge">Coffee</span>
+            <h3>Cold Brew Bottle</h3>
+            <div class="rating">★★★★★</div>
+            <p>Ready-to-drink cold brew for hot weather and travel.</p>
+            <div class="price-row">
+              <div>
+                <div class="price">Rs. 350</div>
+                <div class="old-price">Rs. 450</div>
+              </div>
+              <button class="add-btn" onclick="addToCart('Cold Brew Bottle', 350)">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="deals">
+      <div class="deal-banner">
+        <div>
+          <h2>Special Version 1.1 Launch Offer</h2>
+          <p>Get special discount on selected products. This section is useful for demonstrating UI change after CI/CD deployment.</p>
+        </div>
+        <div class="deal-box">
+          <h3>Up to</h3>
+          <h2>30% OFF</h2>
+          <p>Limited time</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <h2>Why Choose Us?</h2>
+          <p>Important ecommerce service features.</p>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <h3>🚚 Fast Delivery</h3>
+          <p>Quick delivery service for online customers.</p>
+        </div>
+        <div class="feature">
+          <h3>🔒 Secure Payment</h3>
+          <p>Safe checkout design for customer trust.</p>
+        </div>
+        <div class="feature">
+          <h3>↩ Easy Return</h3>
+          <p>Simple return policy improves satisfaction.</p>
+        </div>
+        <div class="feature">
+          <h3>☎ Support</h3>
+          <p>Customer support for order and product queries.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <h2>Customer Reviews</h2>
+          <p>Sample testimonial cards for ecommerce layout.</p>
+        </div>
+      </div>
+
+      <div class="testimonials">
+        <div class="testimonial">
+          <p>"The website is clean and easy to use. Product cards are simple and attractive."</p>
+          <h4>- Ram, Student</h4>
+        </div>
+        <div class="testimonial">
+          <p>"This demo is perfect for Jenkins CI/CD practical class and Apache hosting."</p>
+          <h4>- Sita, Developer</h4>
+        </div>
+        <div class="testimonial">
+          <p>"I liked the cart feature and category filtering in a single HTML file."</p>
+          <h4>- Hari, Teacher</h4>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="newsletter">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Receive latest product updates, offers and ecommerce news.</p>
+        <div class="newsletter-form">
+          <input type="email" id="emailInput" placeholder="Enter your email" />
+          <button class="btn btn-primary" onclick="subscribeUser()">Subscribe</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button class="close-cart" onclick="toggleCart()">Close</button>
+    </div>
+    <div id="cartItems"></div>
+    <div class="cart-total">Total: Rs. <span id="cartTotal">0</span></div>
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
+  </aside>
+
+  <footer id="contact">
+    <div class="footer-content">
+      <div>
+        <h3>Janki Store</h3>
+        <p>A demo ecommerce website for DevOps CI/CD lab using Jenkins, GitHub and Apache2.</p>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <a href="#home">About</a>
+        <a href="#products">Products</a>
+        <a href="#deals">Offers</a>
+      </div>
+      <div>
+        <h3>Support</h3>
+        <a href="#">Help Center</a>
+        <a href="#">Shipping</a>
+        <a href="#">Return Policy</a>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p>Email: info@jankistore.com</p>
+        <p>Phone: +977-9800000000</p>
+        <p>Location: Nepal</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const cart = [];
+
+    function addToCart(name, price) {
+      const existingItem = cart.find(item => item.name === name);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          name: name,
+          price: price,
+          quantity: 1
+        });
+      }
+
+      updateCart();
+      showMessage(name + " added to cart");
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById("cartItems");
+      const cartCount = document.getElementById("cartCount");
+      const cartTotal = document.getElementById("cartTotal");
+
+      cartItems.innerHTML = "";
+      let total = 0;
+      let count = 0;
+
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+        count += item.quantity;
+
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+        itemDiv.innerHTML = `
+          <h4>${item.name}</h4>
+          <p>Price: Rs. ${item.price}</p>
+          <p>Quantity: ${item.quantity}</p>
+          <p>Subtotal: Rs. ${subtotal}</p>
+          <button onclick="removeItem(${index})" style="background:#dc2626;color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;">Remove</button>
+        `;
+
+        cartItems.appendChild(itemDiv);
+      });
+
+      cartCount.textContent = count;
+      cartTotal.textContent = total;
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function toggleCart() {
+      const panel = document.getElementById("cartPanel");
+      panel.classList.toggle("open");
+    }
+
+    function filterProducts(category) {
+      const products = document.querySelectorAll(".product");
+      const buttons = document.querySelectorAll(".filter-btn");
+
+      buttons.forEach(button => button.classList.remove("active"));
+      event.target.classList.add("active");
+
+      products.forEach(product => {
+        if (category === "all" || product.dataset.category === category) {
+          product.style.display = "flex";
+        } else {
+          product.style.display = "none";
+        }
+      });
+    }
+
+    function subscribeUser() {
+      const email = document.getElementById("emailInput").value;
+
+      if (email.trim() === "") {
+        alert("Please enter your email address.");
+        return;
+      }
+
+      alert("Thank you for subscribing: " + email);
+      document.getElementById("emailInput").value = "";
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      alert("Checkout demo completed. This is a frontend-only ecommerce page.");
+    }
+
+    function showMessage(message) {
+      const toast = document.createElement("div");
+      toast.textContent = message;
+      toast.style.position = "fixed";
+      toast.style.bottom = "20px";
+      toast.style.left = "50%";
+      toast.style.transform = "translateX(-50%)";
+      toast.style.background = "#0f172a";
+      toast.style.color = "white";
+      toast.style.padding = "12px 18px";
+      toast.style.borderRadius = "8px";
+      toast.style.zIndex = "999";
+
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 1800);
+    }
+  </script>
+</body>
+</html>
